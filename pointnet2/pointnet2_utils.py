@@ -4,7 +4,7 @@ from torch.autograd import Function
 import torch.nn as nn
 from typing import Tuple
 
-import pointnet2_cuda as pointnet2
+import pointnet2_cuda as pointnet2 # need to run setup.py install
 
 
 class FurthestPointSampling(Function):

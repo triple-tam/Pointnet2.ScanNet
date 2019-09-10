@@ -5,7 +5,7 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader
 from plyfile import PlyElement, PlyData
-from PointNet2ScanNetDataset import ScannetDatasetWholeScene, collate_wholescene
+from lib.dataset import ScannetDatasetWholeScene, collate_wholescene
 
 # for PointNet2.PyTorch module
 import sys

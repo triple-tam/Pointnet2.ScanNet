@@ -38,6 +38,11 @@ def get_solver(args, dataloader, stamp, weight, is_wholescene):
     Pointnet = importlib.import_module("pointnet2_msg_semseg")
     model = Pointnet.get_model(num_classes=CONF.NUM_CLASSES, is_msg=args.msg).cuda()
 
+# <<<<<<< Updated upstream
+# =======
+#     model = Pointnet.get_model(num_classes=CONF.NUM_CLASSES, input_channels=CONF.INPUT_CHANNELS).cuda()
+#     print(model)
+# >>>>>>> Stashed changes
     num_params = get_num_params(model)
     criterion = WeightedCrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.wd)
@@ -89,9 +94,9 @@ def train(args):
     print("initializing...")
     stamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
     if args.tag: stamp += "_"+args.tag.upper()
-    root = os.path.join(CONF.OUTPUT_ROOT, stamp)
+    root = os.path.join(CONF.OUTPUT_ROOT, args.output_dir)
     os.makedirs(root, exist_ok=True)
-    solver, num_params = get_solver(args, dataloader, stamp, weight, args.wholescene)
+    solver, num_params = get_solver(args, dataloader, args.output_dir, weight, args.wholescene)
     
     print("\n[info]")
     print("Train examples: {}".format(train_examples))
@@ -115,11 +120,16 @@ if __name__ == '__main__':
     parser.add_argument("--debug", action="store_true")
     parser.add_argument("--weighting", action="store_true", help="weight the classes")
     parser.add_argument("--wholescene", action="store_true", help="on the whole scene or on a random chunk")
+#<<<<<<< Updated upstream
     parser.add_argument("--msg", action="store_true", help="apply multiscale grouping or not")
+#=======
+    parser.add_argument('--output_dir', type=str)
+#>>>>>>> Stashed changes
     args = parser.parse_args()
 
     # setting
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
     os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
 
+    print("hey_train", CONF.INPUT_CHANNELS)
     train(args)

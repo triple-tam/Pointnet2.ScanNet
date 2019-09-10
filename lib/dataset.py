@@ -18,10 +18,26 @@ class ScannetDataset():
         self.scene_points_list = []
         self.semantic_labels_list = []
         for scene_id in self.scene_list:
+# <<<<<<< Updated upstream
             scene_data = np.load(CONF.SCANNETV2_FILE.format(scene_id))
             scene_data[:, 3:6] /= 255. # normalize the rgb values
             self.scene_points_list.append(scene_data[:, :6])
             self.semantic_labels_list.append(scene_data[:, 7])
+# =======
+#             print('scene_id', scene_id)
+#
+#             if scene_id == 'scene0218_01':
+#                 scene_data = np.load(CONF.SCANNETV2_FILE.format(scene_id))
+#                 self.scene_points_list.append(scene_data[:, :3 + CONF.INPUT_CHANNELS])
+#                 self.semantic_labels_list.append(scene_data[:, 7])
+#
+#             else:
+#                 scene_data = np.load(CONF.SCANNETV2_FILE.format(scene_id))
+#                 self.scene_points_list.append(scene_data[:, :3+CONF.INPUT_CHANNELS])
+#                 self.semantic_labels_list.append(scene_data[:, 7])
+#
+#
+# >>>>>>> Stashed changes
 
         if self.is_weighting:
             labelweights = np.zeros(CONF.NUM_CLASSES)
@@ -94,8 +110,12 @@ class ScannetDatasetWholeScene():
         self.semantic_labels_list = []
         for scene_id in self.scene_list:
             scene_data = np.load(CONF.SCANNETV2_FILE.format(scene_id))
+# <<<<<<< Updated upstream
             scene_data[:, 3:6] /= 255. # normalize the rgb values
             self.scene_points_list.append(scene_data[:, :6])
+# =======
+#             self.scene_points_list.append(scene_data[:, :3+CONF.INPUT_CHANNELS])
+# >>>>>>> Stashed changes
             self.semantic_labels_list.append(scene_data[:, 7])
 
         if self.is_weighting:

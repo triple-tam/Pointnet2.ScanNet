@@ -1,0 +1,130 @@
+10 Sept 2019
+for repo Pointnet2.ScanNet.Dave2
+
+I forked Dave's git to my git, for which this repo is cloned from.
+Was able to run it up until run07, and made my own annotations
+Wanted to pull updates (xyzrgb features) from Dave's og repo
+
+So I did
+git stash
+git pull Dave's
+git stash pop
+-> then arose merge conflicts
+
+which are now appearing in the files like train.py and dataset.py
+sooo instead of going through the hassle now to fix them, will just abandon this tainted repo
+and start a new repo with Dave's updated code
+
+tam@TUINI15-MA19:~/mydisk/project/00_repos/Pointnet2.ScanNet.Dave2$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	new file:   .idea/.gitignore
+	new file:   .idea/Pointnet2.ScanNet.Dave2.iml
+	new file:   .idea/deployment.xml
+	new file:   .idea/misc.xml
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   eval.py
+	modified:   lib/config.py
+	modified:   lib/dataset.py
+	modified:   pointnet2/pointnet2_msg_semseg.py
+	modified:   pointnet2/pointnet2_utils.py
+	modified:   pointnet2/pytorch_utils.py
+	modified:   preprocessing/collect_scannet_scenes.py
+	modified:   preprocessing/visualize_prep_scene.py
+	modified:   train.py
+	modified:   visualize.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	.idea/inspectionProfiles/
+	.idea/modules.xml
+	.idea/vcs.xml
+	__pycache__/
+	eval_old.py
+	preprocessing/label_point_clouds/
+
+
+tam@TUINI15-MA19:~/mydisk/project/00_repos/Pointnet2.ScanNet.Dave2$ git remote show origin
+* remote origin
+  Fetch URL: https://github.com/triple-tam/Pointnet2.ScanNet.git
+  Push  URL: https://github.com/triple-tam/Pointnet2.ScanNet.git
+  HEAD branch: master
+  Remote branch:
+    master tracked
+  Local branch configured for 'git pull':
+    master merges with remote master
+  Local ref configured for 'git push':
+    master pushes to master (up to date)
+tam@TUINI15-MA19:~/mydisk/project/00_repos/Pointnet2.ScanNet.Dave2$ git checkout master
+A	.idea/.gitignore
+A	.idea/Pointnet2.ScanNet.Dave2.iml
+A	.idea/deployment.xml
+A	.idea/misc.xml
+M	eval.py
+M	lib/config.py
+M	lib/dataset.py
+M	pointnet2/pointnet2_msg_semseg.py
+M	pointnet2/pointnet2_utils.py
+M	pointnet2/pytorch_utils.py
+M	preprocessing/collect_scannet_scenes.py
+M	preprocessing/visualize_prep_scene.py
+M	train.py
+M	visualize.py
+Already on 'master'
+Your branch is up-to-date with 'origin/master'.
+tam@TUINI15-MA19:~/mydisk/project/00_repos/Pointnet2.ScanNet.Dave2$ git stash
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'tam@TUINI15-MA19.(none)')
+Cannot save the current index state
+tam@TUINI15-MA19:~/mydisk/project/00_repos/Pointnet2.ScanNet.Dave2$ git config --global user.email tktamtran@gmail.com
+tam@TUINI15-MA19:~/mydisk/project/00_repos/Pointnet2.ScanNet.Dave2$ git config --global user.name Tam
+tam@TUINI15-MA19:~/mydisk/project/00_repos/Pointnet2.ScanNet.Dave2$ git stash
+Saved working directory and index state WIP on master: 85de920 add license
+HEAD is now at 85de920 add license
+tam@TUINI15-MA19:~/mydisk/project/00_repos/Pointnet2.ScanNet.Dave2$ git stash list
+stash@{0}: WIP on master: 85de920 add license
+stash@{1}: WIP on master: 86db55d fix minor issues
+tam@TUINI15-MA19:~/mydisk/project/00_repos/Pointnet2.ScanNet.Dave2$ git pull https://github.com/daveredrum/Pointnet2.ScanNet.git
+remote: Enumerating objects: 22, done.
+remote: Counting objects: 100% (22/22), done.
+remote: Compressing objects: 100% (10/10), done.
+remote: Total 16 (delta 12), reused 9 (delta 6), pack-reused 0
+Unpacking objects: 100% (16/16), done.
+From https://github.com/daveredrum/Pointnet2.ScanNet
+ * branch            HEAD       -> FETCH_HEAD
+Updating 85de920..5d584fa
+Fast-forward
+ README.md                         |   4 +-
+ lib/dataset.py                    |  14 ++++---
+ pointnet2/pointnet2_msg_semseg.py |  98 -------------------------------------------
+ pointnet2/pointnet2_semseg.py     | 184 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ train.py                          |   3 +-
+ 5 files changed, 196 insertions(+), 107 deletions(-)
+ delete mode 100644 pointnet2/pointnet2_msg_semseg.py
+ create mode 100644 pointnet2/pointnet2_semseg.py
+tam@TUINI15-MA19:~/mydisk/project/00_repos/Pointnet2.ScanNet.Dave2$ git stash pop
+Auto-merging train.py
+CONFLICT (content): Merge conflict in train.py
+CONFLICT (modify/delete): pointnet2/pointnet2_msg_semseg.py deleted in Updated upstream and modified in Stashed changes. Version Stashed changes of pointnet2/pointnet2_msg_semseg.py left in tree.
+Auto-merging lib/dataset.py
+CONFLICT (content): Merge conflict in lib/dataset.py
+tam@TUINI15-MA19:~/mydisk/project/00_repos/Pointnet2.ScanNet.Dave2$ 
+

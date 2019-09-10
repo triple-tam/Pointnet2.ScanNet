@@ -4,9 +4,13 @@ from easydict import EasyDict
 CONF = EasyDict()
 
 # BASE PATH
-CONF.ROOT = "/home/davech2y/Pointnet2.ScanNet" # TODO change this
-CONF.SCANNET_DIR =  "/mnt/canis/Datasets/ScanNet/public/v2/scans" # TODO change this
-CONF.SCENE_NAMES = os.listdir('/mnt/canis/Datasets/ScanNet/public/v1/scans') # TODO change
+ROOT_REPOS = "/home/tam/mydisk/project/00_repos"
+#ROOT_REPOS = "/usr/stud/tranthi/project/00_repos"
+
+CONF.ROOT = ROOT_REPOS + "/Pointnet2.ScanNet.Dave2" # TODO change this
+CONF.SCANNET_DIR =  ROOT_REPOS + "/Pointnet2_PyTorch/pointnet2/data/ScanNet/scans" # TODO change this
+CONF.SCENE_NAMES = os.listdir(ROOT_REPOS + '/Pointnet2_PyTorch/pointnet2/data/ScanNet/scans') # TODO change
+
 
 CONF.PREP = os.path.join(CONF.ROOT, "preprocessing")
 CONF.PREP_SCANS = os.path.join(CONF.PREP, "scannet_scenes")
@@ -19,26 +23,26 @@ CONF.SCANNETV2_FILE = os.path.join(CONF.PREP_SCANS, "{}.npy") # scene_id
 CONF.SCANNETV2_LABEL = os.path.join(CONF.SCAN_LABELS, "{}.ply") # scene_id
 
 CONF.NYUCLASSES = [
-    'floor', 
+    'floor', #0
     'wall', 
     'cabinet', 
     'bed', 
     'chair', 
-    'sofa', 
+    'sofa', #5
     'table', 
     'door', 
     'window', 
     'bookshelf', 
-    'picture', 
+    'picture', #10
     'counter', 
     'desk', 
     'curtain', 
     'refrigerator', 
-    'bathtub', 
+    'bathtub', #15
     'shower curtain', 
     'toilet', 
     'sink', 
-    'otherprop'
+    'otherprop'#19
 ]
 CONF.NUM_CLASSES = len(CONF.NYUCLASSES)
 CONF.PALETTE = [
@@ -63,3 +67,6 @@ CONF.PALETTE = [
     (112, 128, 144),		# sink
     (82, 84, 163),          # otherfurn
 ]
+
+
+CONF.INPUT_CHANNELS = 0 # aka whether to use rgb data or not
